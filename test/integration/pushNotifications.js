@@ -57,7 +57,7 @@ describe('Push notifications', function() {
               pushNotificationsOpts: {
                 templatePath: './lib/templates',
                 defaultLanguage: 'en',
-                defaultUnit: 'btc',
+                defaultUnit: 'dcr',
                 subjectPrefix: '',
 
                 pushServerUrl: 'http://localhost:8000/send',
@@ -175,7 +175,7 @@ describe('Push notifications', function() {
               pushNotificationsOpts: {
                 templatePath: './lib/templates',
                 defaultLanguage: 'en',
-                defaultUnit: 'btc',
+                defaultUnit: 'dcr',
                 subjectPrefix: '',
 
                 pushServerUrl: 'http://localhost:8000/send',
@@ -193,7 +193,7 @@ describe('Push notifications', function() {
       server.savePreferences({
         email: 'copayer1@domain.com',
         language: 'es',
-        unit: 'btc',
+        unit: 'dcr',
       }, function(err) {
         server.createAddress({}, function(err, address) {
           should.not.exist(err);
@@ -421,7 +421,7 @@ describe('Push notifications', function() {
             pushNotificationsOpts: {
               templatePath: './lib/templates',
               defaultLanguage: 'en',
-              defaultUnit: 'btc',
+              defaultUnit: 'dcr',
               subjectPrefix: '',
               pushServerUrl: 'http://localhost:8000/send',
             },

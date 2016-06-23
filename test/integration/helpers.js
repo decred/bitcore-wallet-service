@@ -205,11 +205,11 @@ helpers.randomTXID = function() {
   return Bitcore.crypto.Hash.sha256(new Buffer(Math.random() * 100000)).toString('hex');;
 };
 
-helpers.toSatoshi = function(btc) {
-  if (_.isArray(btc)) {
-    return _.map(btc, helpers.toSatoshi);
+helpers.toAtom = function(dcr) {
+  if (_.isArray(dcr)) {
+    return _.map(dcr, helpers.toAtom);
   } else {
-    return Utils.strip(btc * 1e8);
+    return Utils.strip(dcr * 1e8);
   }
 };
 
@@ -221,7 +221,7 @@ helpers._parseAmount = function(str) {
 
   if (_.isNumber(str)) str = str.toString();
 
-  var re = /^((?:\d+c)|u)?\s*([\d\.]+)\s*(btc|bit|sat)?$/;
+  var re = /^((?:\d+c)|u)?\s*([\d\.]+)\s*(dcr|bit|sat)?$/;
   var match = str.match(re);
 
   if (!match) throw new Error('Could not parse amount ' + str);
@@ -233,7 +233,7 @@ helpers._parseAmount = function(str) {
 
   switch (match[3]) {
     default:
-    case 'btc':
+    case 'dcr':
       result.amount = Utils.strip(+match[2] * 1e8);
       break;
     case 'bit':
@@ -288,7 +288,7 @@ helpers.stubUtxos = function(server, wallet, amounts, opts, cb) {
         return {
           txid: helpers.randomTXID(),
           vout: _.random(0, 10),
-          satoshis: parsed.amount,
+          atoms: parsed.amount,
           scriptPubKey: scriptPubKey.toBuffer().toString('hex'),
           address: address.address,
           confirmations: parsed.confirmations,
@@ -395,7 +395,7 @@ helpers.clientSign = function(txp, derivedXPrivKey) {
 helpers.createProposalOptsLegacy = function(toAddress, amount, message, signingKey, feePerKb) {
   var opts = {
     toAddress: toAddress,
-    amount: helpers.toSatoshi(amount),
+    amount: helpers.toAtom(amount),
     message: message,
     proposalSignature: null,
   };
@@ -444,7 +444,7 @@ helpers.getProposalSignatureOpts = function(txp, signingKey) {
 
 helpers.createProposalOpts = function(type, outputs, signingKey, moreOpts, inputs) {
   _.each(outputs, function(output) {
-    output.amount = helpers.toSatoshi(output.amount);
+    output.amount = helpers.toAtom(output.amount);
   });
 
   var opts = {

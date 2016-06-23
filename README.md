@@ -131,7 +131,7 @@ Returns:
 `/v1/txproposals/`: Add a new transaction proposal
 Required Arguments:
  * toAddress: RCPT Bitcoin address.
- * amount: amount (in satoshis) of the mount proposed to be transfered
+ * amount: amount (in atoms) of the mount proposed to be transfered
  * proposalsSignature: Signature of the proposal by the creator peer, using prososalSigningKey.
  * (opt) message: Encrypted private message to peers.
  * (opt) payProUrl: Paypro URL for peers to verify TX
