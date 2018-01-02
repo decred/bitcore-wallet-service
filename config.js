@@ -1,3 +1,5 @@
+var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/bws';
+
 var config = {
   basePath: '/bws/api',
   disableLogs: false,
@@ -19,7 +21,7 @@ var config = {
 
   storageOpts: {
     mongoDb: {
-      uri: 'mongodb://localhost:27017/bws',
+      uri: MONGODB_URI,
     },
   },
   lockOpts: {
@@ -42,7 +44,7 @@ var config = {
     },
     dcrdtestnet: {
       provider: 'insight',
-      url: 'http://127.0.0.1:3004',
+      url: 'http://insight:3004',
       // url: 'http://localhost:3001',
       // Multiple servers (in priority order)
       // url: ['http://a.b.c', 'https://test-insight.bitpay.com:443'],
